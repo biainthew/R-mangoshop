@@ -3,6 +3,7 @@ import { Button, message, Form, Input, Divider, InputNumber } from 'antd';
 import "./UploadPage.scss"
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Upload from 'antd/es/upload/Upload';
 
 export default function UploadPage() {
     const [imageUrl, setImageUrl] = useState(null);
@@ -34,10 +35,13 @@ export default function UploadPage() {
     <div id='upload-container'>
       <Form name='upload-form' onFinish={onSubmit}>
         <Form.Item name="upload" label={<span className='upload-label'>상품사진</span>}>
-            <div id='upload-image' onChange={onChangeImage}>
-                <img src="/images/icons/camera.png" alt="" />
-                <span>이미지를 업로드 해주세요</span>
-            </div>
+            <Upload name="image" action="http://localhost:8080/image" listType='picture' showUploadList={false} onChange={function(){}}>
+                <div id="upload-image" onChange={onChangeImage}>
+                    <img src="/images/icons/camera.png" alt="" />
+                    <span>이미지를 업로드 해주세요</span>
+                </div>
+            </Upload>
+            
         </Form.Item>
         <Divider/>
         <Form.Item name='seller' rules={[{required:true, message: "판매자명은 필수 입력값 입니다"}]} label={<span className='upload-label'>판매자명</span>}>
